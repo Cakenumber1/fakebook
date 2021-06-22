@@ -1,10 +1,10 @@
 #Fakebook  
-##Цели:
+##Цели:  
 + Написать все с линтером
 + Верста (адаптивная)  
 + Бекэнд (Node + Firebase)  
-##Исходники
+##Исходники  
 [mobile](./sourceimgs/)  
 desktop -  
-##Сайт 
+##Сайт  
 [fakebook](https://cakenumber1.github.io/fakebook) 
