@@ -1,10 +1,13 @@
 import React from 'react';
 import img1 from '../../../img/prof.jpg';
+import {NavLink} from 'react-router-dom';
 
 const Create = () => (
 	<div className="create">
 		<div className="user">
-			<img className="user__icon " src={img1} alt={img1}/>
+			<NavLink to="/fakebook/user1/">
+				<img className="user__icon " src={img1} alt={img1}/>
+			</NavLink>
 		</div>
 		<div className="create__mid">
 			<button type="button">Что у вас нового?</button>

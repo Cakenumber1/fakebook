@@ -3,15 +3,16 @@ import img1 from '../../../img/prof.jpg';
 import err from '../../../img/error.png';
 import npic from '../../../img/npic.jpg';
 import like from '../../../img/like.svg';
+import {NavLink} from 'react-router-dom';
 
 const News = () => (
 	<div className="news__container">
 		<div className="news__top">
-			<div className="user">
+			<NavLink to="/fakebook/user1" className="user">
 				<img className="user__icon " src={img1} alt="{img1}"/>
-			</div>
+			</NavLink>
 			<div className="info">
-				<a className="info__name" href=""><b>Имя Фамилия</b></a>
+				<NavLink to="/fakebook/user1" className="info__name" href=""><b>Имя Фамилия</b></NavLink>
 				<div className="info__date">
 					<div>
 						18 июня, 17:37
@@ -55,9 +56,9 @@ const News = () => (
 			<div className="user">
 				<img className="user__icon " src={img1} alt=""/>
 			</div>
-			<div className="comment">
+			<div className="comment__inner">
 				<div className="comment__name"><b>Имя Фамилия</b></div>
-				<div> ТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекстТекст</div>
+				<div className="comment__text"> кстТекстксткстТексткстТекстксткстТексткстТекстксткстТекст</div>
 			</div>
 		</div>
 	</div>

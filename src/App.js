@@ -6,6 +6,7 @@ import Messages from './blocks/Messages/Messages';
 import Friends from './blocks/Friends/Friends';
 import Notifications from './blocks/Notifications/Notifications';
 import Search from './blocks/Search/Search';
+import User from './blocks/User/User';
 
 const App = () => (
 	<BrowserRouter>
@@ -15,6 +16,7 @@ const App = () => (
 		<Route path="/fakebook/messages" component={Messages}/>
 		<Route path="/fakebook/notifications" component={Notifications}/>
 		<Route path="/fakebook/search" component={Search}/>
+		<Route path="/fakebook/user1" component={User}/>
 	</BrowserRouter>
 );
 

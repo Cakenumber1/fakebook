@@ -3,7 +3,7 @@
   background: white;
 
   > div {
-    padding: 5px 10px 5px 10px;
+    padding: 6px 10px 6px 10px;
   }
 }
 
@@ -95,21 +95,30 @@
 .top__comment {
   display: flex;
   margin-top: 5px;
-  overflow: hidden;
-}
 
-.comment {
-  padding: 10px;
-  width: 80%;
-  background: #e2e2e2;
-  border-radius: 10px;
-  margin-left: 8px;
-
-  > div {
+  .user{
+    width: 40px;
+    margin-right: 8px;
+  }
+  .comment__inner{
+    font-size: 14px;
+    background: #e2e2e2;
+    border-radius: 15px;
+    width: 100%;
+    padding: 6px;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
+
+
+
+.comment__text{
+  padding-top: 3px ;
+  width: 100%;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
 .likes__c{
   display: flex;
   align-items: center;
