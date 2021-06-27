@@ -1,6 +1,7 @@
 import React from 'react';
 import img1 from '../../img/prof.jpg';
 import npic from '../../img/npic.jpg';
+import {NavLink} from 'react-router-dom';
 
 const Notifications = () => (
 	<div className="notifications">
@@ -12,18 +13,20 @@ const Notifications = () => (
 			<div>Ранее</div>
 		</div>
 		<div className="inner">
-			<div className="notification">
+			<NavLink to="/fakebook/overlay__notifications/" className="notification">
 				<div className="user">
-					<img className="user__icon " src={img1} alt="{img1}"/>
+					<NavLink to="/fakebook/overlay__notifications/">
+						<img className="user__icon " src={img1} alt="{img1}"/>
+					</NavLink>
 				</div>
 				<div className="info">
-					<a className="info__name" href=""><b>Имя Фамилия</b> liked your photo</a>
+					<div className="info__name"><NavLink to="/fakebook/overlay__notifications/"><b>Имя Фамилия</b></NavLink> liked your photo</div>
 					<div className="info__date">18 июня, 17:37</div>
 				</div>
 				<div className="news__ref">
 					<img src={npic} alt=""/>
 				</div>
-			</div>
+			</NavLink>
 		</div>
 
 	</div>

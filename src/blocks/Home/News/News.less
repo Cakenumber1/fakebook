@@ -91,7 +91,11 @@
     cursor: pointer;
   }
 }
-
+.add__comment{
+  a{
+    color: grey;
+  }
+}
 .top__comment {
   display: flex;
   margin-top: 5px;
@@ -99,6 +103,10 @@
   .user{
     width: 40px;
     margin-right: 8px;
+    a{
+      display: flex;
+      align-items: center;
+    }
   }
   .comment__inner{
     font-size: 14px;
@@ -107,10 +115,10 @@
     width: 100%;
     padding: 6px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 }
-
-
 
 .comment__text{
   padding-top: 3px ;

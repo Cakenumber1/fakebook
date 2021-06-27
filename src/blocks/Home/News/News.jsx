@@ -8,11 +8,11 @@ import {NavLink} from 'react-router-dom';
 const News = () => (
 	<div className="news__container">
 		<div className="news__top">
-			<NavLink to="/fakebook/user1" className="user">
+			<NavLink to="/fakebook/overlay__home/" className="user">
 				<img className="user__icon " src={img1} alt="{img1}"/>
 			</NavLink>
 			<div className="info">
-				<NavLink to="/fakebook/user1" className="info__name" href=""><b>Имя Фамилия</b></NavLink>
+				<NavLink to="/fakebook/overlay__home/" className="info__name"><b>Имя Фамилия</b></NavLink>
 				<div className="info__date">
 					<div>
 						18 июня, 17:37
@@ -40,25 +40,31 @@ const News = () => (
 			</div>
 		</div>
 		<div className="news__text">Текст Новости</div>
-		<div className="news__img">
+		<NavLink to="/fakebook/overlay__home/" className="news__img">
 			<img src={npic} alt=""/>
-		</div>
+		</NavLink>
 		<div className="likesncomments">
 			<div className="likes__c"><img src={like} height="15" width="15" alt=""/> 0</div>
 			<div className="comments__c">Комментарии: 0</div>
 		</div>
 		<div className="news__actions">
 			<div className="add__like">Нравится</div>
-			<div className="add__comment">Комментировать</div>
+			<div className="add__comment">
+				<NavLink to="/fakebook/overlay__home/">
+					Комментировать
+				</NavLink>
+			</div>
 			<div className="add__share">Поделиться</div>
 		</div>
 		<div className="top__comment">
 			<div className="user">
-				<img className="user__icon " src={img1} alt=""/>
+				<NavLink to="/fakebook/overlay__home/">
+					<img className="user__icon " src={img1} alt=""/>
+				</NavLink>
 			</div>
 			<div className="comment__inner">
-				<div className="comment__name"><b>Имя Фамилия</b></div>
-				<div className="comment__text"> кстТекстксткстТексткстТекстксткстТексткстТекстксткстТекст</div>
+				<NavLink to="/fakebook/overlay__home/" className="comment__name"><b>Имя Фамилия</b></NavLink>
+				<NavLink to="/fakebook/overlay__home/" className="comment__text"> кстТекстксткстТексткстТекстксткстТексткстТекстксткстТекст</NavLink>
 			</div>
 		</div>
 	</div>
