@@ -1,8 +1,9 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
+
+import Header from '../Header/Header';
 import img1 from '../../img/prof.jpg';
 import npic from '../../img/npic.jpg';
-import {NavLink} from 'react-router-dom';
-import Header from '../Header/Header';
 
 const Notifications = () => (
 	<div>

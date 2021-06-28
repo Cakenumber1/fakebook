@@ -1,8 +1,9 @@
 import React from "react"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
-import PrivateRoute from "./blocks/PrivateRoute";
 
 import {AuthProvider} from "./contexts/AuthContext";
+
+import PrivateRoute from "./blocks/PrivateRoute";
 import Signup from './blocks/Signup'
 import Login from "./blocks/Login";
 import ForgotPassword from "./blocks/ForgotPassword";

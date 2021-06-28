@@ -1,9 +1,10 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
+
 import img1 from '../../../img/prof.jpg';
 import err from '../../../img/error.png';
 import npic from '../../../img/npic.jpg';
 import like from '../../../img/like.svg';
-import {NavLink} from 'react-router-dom';
 
 const News = () => (
 	<div className="news__container">

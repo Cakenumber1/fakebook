@@ -1,6 +1,7 @@
 import React from 'react';
-import img1 from '../../../img/prof.jpg';
 import {NavLink} from 'react-router-dom';
+
+import img1 from '../../../img/prof.jpg';
 
 const Create = () => (
 	<div className="create">
