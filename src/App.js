@@ -24,7 +24,7 @@ function App() {
           <Route path="/fakebook/signup" component={Signup}/>
           <Route path="/fakebook/login" component={Login}/>
           <Route path="/fakebook/forgot-password" component={ForgotPassword}/>
-          <PrivateRoute path="/fakebook" component={Home}/>
+          <PrivateRoute exact path="/fakebook" component={Home}/>
           <PrivateRoute path="/fakebook/home" component={Home}/>
           <PrivateRoute path="/fakebook/friends" component={Friends}/>
           <PrivateRoute path="/fakebook/messages" component={Messages}/>
