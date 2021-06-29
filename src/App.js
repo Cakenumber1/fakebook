@@ -30,10 +30,10 @@ function App() {
           <PrivateRoute path="/fakebook/messages" component={Messages}/>
           <PrivateRoute path="/fakebook/notifications" component={Notifications}/>
           <PrivateRoute path="/fakebook/search" component={Search}/>
-          <PrivateRoute path="/fakebook/overlay__friends" render={() => <Overlay prev="/fakebook/friends/"/>}/>
-          <PrivateRoute path="/fakebook/overlay__home" render={() => <Overlay prev="/fakebook/home/"/>}/>
-          <PrivateRoute path="/fakebook/overlay__messages" render={() => <Overlay prev="/fakebook/messages/"/>}/>
-          <PrivateRoute path="/fakebook/overlay__notifications" render={() => <Overlay prev="/fakebook/notifications/"/>}/>
+          <PrivateRoute path="/fakebook/overlay__friends" component={Overlay}/>
+          <PrivateRoute path="/fakebook/overlay__home"  component={Overlay}/>
+          <PrivateRoute path="/fakebook/overlay__messages" component={Overlay}/>
+          <PrivateRoute path="/fakebook/overlay__notifications" component={Overlay}/>
         </Switch>
       </AuthProvider>
       </Router>
