@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 import {useAuth} from '../../contexts/AuthContext';
 
@@ -10,8 +10,8 @@ import Header from '../Header/Header';
 import {Button} from 'react-bootstrap';
 
 const Home = () => {
-	// A error
-	const [setError] = useState('');
+
+	const [error, setError] = useState('');
 	const {currentUser, logout} = useAuth();
 	const history = useHistory();
 
@@ -32,9 +32,6 @@ const Home = () => {
 			<Create/>
 			<News/>
 			<FindF/>
-			<Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-				Update Profile
-			</Link>
 			<div>{currentUser.email}</div>
 			<Button variant="link" onClick={handleLogout}>
 				Log Out
