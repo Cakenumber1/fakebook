@@ -23,9 +23,9 @@ const ForgotPassword = () => {
 			setMessage('Check your inbox for further instructions');
 		} catch {
 			setError('Failed to reset password');
+		}finally {
+			setLoading(false);
 		}
-
-		setLoading(false);
 	}
 
 	return (
