@@ -2,16 +2,20 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 import Header from '../Header/Header';
+import {rmap} from '../../router';
 
 const Friends = () => (
 	<div>
 		<Header/>
 		<div className="friends">
-
 			<div className="friends__top">
-				<NavLink to="/fakebook/overlay__friends/"><button type="button"><b>Рекомендации</b></button></NavLink>
-				<NavLink to="/fakebook/overlay__friends/"><button type="button"><b>Друзья</b></button></NavLink>
-			</div>
+				<NavLink to={rmap.get("url_ov_friends")}>
+					<button type="button"><b>Рекомендации</b></button>
+				</NavLink>
+				<NavLink to={rmap.get("url_ov_friends")}>
+					<button type="button"><b>Друзья</b></button>
+				</NavLink>
+			</div>s
 			<div className="friends__req inner">
 				<h3>Запросы на добавление в друзья</h3>
 				<div className="no__req no__text">Нет запросов</div>

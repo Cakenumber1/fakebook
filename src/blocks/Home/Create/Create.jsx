@@ -2,21 +2,22 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 
 import img1 from '../../../img/prof.jpg';
+import {rmap} from '../../../router';
 
 const Create = () => (
 	<div className="create">
 		<div>
-			<NavLink to="/fakebook/overlay__home/" className="user">
+			<NavLink to={rmap.get("url_ov_home")} className="user">
 				<img className="user__icon " src={img1} alt={img1}/>
 			</NavLink>
 		</div>
 		<div className="create__mid">
-			<NavLink to="/fakebook/overlay__home/">
+			<NavLink to={rmap.get("url_ov_home")}>
 				<button type="button" className="decor">Что у вас нового?</button>
 			</NavLink>
 		</div>
 		<div className="decor">
-			<NavLink to="/fakebook/overlay__home/" className="photo">
+			<NavLink to={rmap.get("url_ov_home")} className="photo">
 				<svg className="svg-icon" viewBox="0 0 32 32">
 					<g fill="#2a3345">
 						<path

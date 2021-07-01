@@ -3,6 +3,7 @@ import {Form, Button, Card, Alert, Container} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
 
 import {useAuth} from '../contexts/AuthContext';
+import {rmap} from '../router';
 
 const Login = () => {
 	const emailRef = useRef();
@@ -19,7 +20,7 @@ const Login = () => {
 			setError('');
 			setLoading(true);
 			await login(emailRef.current.value, passwordRef.current.value);
-			history.push('/fakebook/home');
+			history.push(rmap.get("url_home"));
 		} catch {
 			setError('Failed to log in');
 		}
@@ -30,7 +31,7 @@ const Login = () => {
 	return (
 		<Container
 			className="d-flex align-items-center justify-content-center"
-			style={{ minHeight: "100vh" }}
+			style={{minHeight: "100vh"}}
 		>
 			<Card>
 				<Card.Body>
@@ -50,10 +51,10 @@ const Login = () => {
 						</Button>
 					</Form>
 					<div className="w-100 text-center mt-3">
-						<Link to="/fakebook/forgot-password">Forgot Password?</Link>
+						<Link to={rmap.get("url_for_pass")}>Forgot Password?</Link>
 					</div>
 					<div className="w-100 text-center mt-2">
-						Need an account? <Link to="/fakebook/signup">Sign Up</Link>
+						Need an account? <Link to={rmap.get("url_signup")}>Sign Up</Link>
 					</div>
 				</Card.Body>
 			</Card>

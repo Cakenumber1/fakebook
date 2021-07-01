@@ -3,6 +3,7 @@ import {Form, Button, Card, Alert, Container} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
 
 import {useAuth} from '../contexts/AuthContext';
+import {rmap} from '../router';
 
 const Signup = () => {
 	const emailRef = useRef();
@@ -24,7 +25,7 @@ const Signup = () => {
 			setError('');
 			setLoading(true);
 			await signup(emailRef.current.value, passwordRef.current.value);
-			history.push('/fakebook/home');
+			history.push(rmap.get("url_home"));
 		} catch {
 			setError('Failed to create an account');
 		}
@@ -35,7 +36,7 @@ const Signup = () => {
 	return (
 		<Container
 			className="d-flex align-items-center justify-content-center"
-			style={{ minHeight: "100vh" }}
+			style={{minHeight: "100vh"}}
 		>
 			<Card>
 				<Card.Body>
@@ -59,7 +60,7 @@ const Signup = () => {
 						</Button>
 					</Form>
 					<div className="w-100 text-center mt-2">
-						Already have an account? <Link to="/fakebook/login">Log In</Link>
+						Already have an account? <Link to={rmap.get("url_login")}>Log In</Link>
 					</div>
 				</Card.Body>
 			</Card>

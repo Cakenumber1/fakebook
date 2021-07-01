@@ -1,9 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+import {rmap} from '../../router';
 
 const Header = () => (
 	<div className="nav">
-		<NavLink to="/fakebook/home" className="nav__block">
+		<NavLink to={rmap.get("url_home")} className="nav__block">
 			<svg className="svg-icon" viewBox="0 0 32 32">
 				<g fill="#2a3345">
 					<path
@@ -41,7 +42,7 @@ const Header = () => (
 				</g>
 			</svg>
 		</NavLink>
-		<NavLink to="/fakebook/friends" className="nav__block">
+		<NavLink to={rmap.get("url_friends")} className="nav__block">
 			<svg className="svg-icon search-icon" viewBox="0 0 32 32">
 				<g fill="#2a3345">
 					<path
@@ -63,7 +64,7 @@ const Header = () => (
 				</g>
 			</svg>
 		</NavLink>
-		<NavLink to="/fakebook/messages" className="nav__block">
+		<NavLink to={rmap.get("url_messages")} className="nav__block">
 			<svg className="svg-icon" viewBox="0 0 32 32">
 				<g>
 					<path
@@ -77,7 +78,7 @@ const Header = () => (
 				</g>
 			</svg>
 		</NavLink>
-		<NavLink to="/fakebook/notifications" className="nav__block">
+		<NavLink to={rmap.get("url_notifications")} className="nav__block">
 			<svg className="svg-icon" viewBox="0 0 32 32">
 				<g fill="#2a3345">
 					<path
@@ -91,7 +92,7 @@ const Header = () => (
 				</g>
 			</svg>
 		</NavLink>
-		<NavLink to="/fakebook/search" className="nav__block">
+		<NavLink to={rmap.get("url_search")} className="nav__block">
 			<svg className="svg-icon" viewBox="0 0 32 32">
 				<g fill="#2a3345">
 					<path
@@ -101,7 +102,7 @@ const Header = () => (
 				</g>
 			</svg>
 		</NavLink>
-		<NavLink to="/fakebook/options" className="nav__block">
+		<NavLink to={rmap.get("url_options")} className="nav__block">
 			<svg className="svg-icon" viewBox="0 0 32 32">
 				<g fill="#2a3345">
 					<path

@@ -6,7 +6,10 @@ import err from '../../../img/error.png';
 import npic from '../../../img/npic.jpg';
 import like from '../../../img/like.svg';
 
+import {rmap} from '../../../router';
+
 const News = () => {
+
 	function dropdown() {
 		const x = document.querySelector('.news__options__content');
 		if (x.style.display === 'none') {
@@ -19,11 +22,11 @@ const News = () => {
 	return (
 		<div className="news__container">
 			<div className="news__top">
-				<NavLink to="/fakebook/overlay__home/" className="user">
+				<NavLink to={rmap.get("url_ov_home")} className="user">
 					<img className="user__icon " src={img1} alt="{img1}"/>
 				</NavLink>
 				<div className="info">
-					<NavLink to="/fakebook/overlay__home/" className="info__name"><b>Имя Фамилия</b></NavLink>
+					<NavLink to={rmap.get("url_ov_home")} className="info__name"><b>Имя Фамилия</b></NavLink>
 					<div className="info__date">
 						<div>
 							18 июня, 17:37
@@ -52,7 +55,7 @@ const News = () => {
 				</div>
 			</div>
 			<div className="news__text">Текст Новости</div>
-			<NavLink to="/fakebook/overlay__home/" className="news__img">
+			<NavLink to={rmap.get("url_ov_home")} className="news__img">
 				<img src={npic} alt=""/>
 			</NavLink>
 			<div className="likesncomments">
@@ -62,7 +65,7 @@ const News = () => {
 			<div className="news__actions">
 				<div className="add__like">Нравится</div>
 				<div className="add__comment">
-					<NavLink to="/fakebook/overlay__home/">
+					<NavLink to={rmap.get("url_ov_home")}>
 						Комментировать
 					</NavLink>
 				</div>
@@ -70,13 +73,13 @@ const News = () => {
 			</div>
 			<div className="top__comment">
 				<div className="user">
-					<NavLink to="/fakebook/overlay__home/">
+					<NavLink to={rmap.get("url_ov_home")}>
 						<img className="user__icon " src={img1} alt=""/>
 					</NavLink>
 				</div>
 				<div className="comment__inner">
-					<NavLink to="/fakebook/overlay__home/" className="comment__name"><b>Имя Фамилия</b></NavLink>
-					<NavLink to="/fakebook/overlay__home/"
+					<NavLink to={rmap.get("url_ov_home")} className="comment__name"><b>Имя Фамилия</b></NavLink>
+					<NavLink to={rmap.get("url_ov_home")}
 							 className="comment__text"> кстТекстксткстТексткстТекстксткстТексткстТекстксткстТекст</NavLink>
 				</div>
 			</div>

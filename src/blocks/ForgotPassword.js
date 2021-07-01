@@ -3,6 +3,7 @@ import {Form, Button, Card, Alert, Container} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 import {useAuth} from '../contexts/AuthContext';
+import {rmap} from '../router';
 
 const ForgotPassword = () => {
 	const emailRef = useRef();
@@ -30,7 +31,7 @@ const ForgotPassword = () => {
 	return (
 		<Container
 			className="d-flex align-items-center justify-content-center"
-			style={{ minHeight: "100vh" }}
+			style={{minHeight: "100vh"}}
 		>
 			<Card>
 				<Card.Body>
@@ -47,10 +48,10 @@ const ForgotPassword = () => {
 						</Button>
 					</Form>
 					<div className="w-100 text-center mt-3">
-						<Link to="/fakebook/login">Login</Link>
+						<Link to={rmap.get("url_login")}>Login</Link>
 					</div>
 					<div className="w-100 text-center mt-2">
-						Need an account? <Link to="/fakebook/signup">Sign Up</Link>
+						Need an account? <Link to={rmap.get("url_signup")}>Sign Up</Link>
 					</div>
 				</Card.Body>
 			</Card>

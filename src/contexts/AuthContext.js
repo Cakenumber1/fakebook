@@ -7,7 +7,7 @@ export function useAuth() {
 	return useContext(AuthContext);
 }
 
-// eslint-disable-next-line react/prop-types
+
 export const AuthProvider = ({children}) => {
 	const [currentUser, setCurrentUser] = useState();
 	const [loading, setLoading] = useState(true);
@@ -37,7 +37,6 @@ export const AuthProvider = ({children}) => {
 		return unsubscribe;
 	}, []);
 
-	// eslint-disable-next-line react/jsx-no-constructed-context-values
 	const value = {
 		currentUser,
 		login,

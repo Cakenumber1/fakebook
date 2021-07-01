@@ -9,6 +9,8 @@ import FindF from './FindF/FindF';
 import Header from '../Header/Header';
 import {Button} from 'react-bootstrap';
 
+import {rmap} from '../../router';
+
 const Home = () => {
 
 	const [error, setError] = useState('');
@@ -20,9 +22,9 @@ const Home = () => {
 
 		try {
 			await logout();
-			history.push('/fakebook/login');
+			history.push(rmap.get("url_login"));
 		} catch {
-			setError('Failed to log out');
+			setError("Failed to log out");
 		}
 	}
 

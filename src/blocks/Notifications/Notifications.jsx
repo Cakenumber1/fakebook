@@ -5,6 +5,8 @@ import Header from '../Header/Header';
 import img1 from '../../img/prof.jpg';
 import npic from '../../img/npic.jpg';
 
+import {rmap} from '../../router';
+
 const Notifications = () => (
 	<div>
 		<Header/>
@@ -17,14 +19,16 @@ const Notifications = () => (
 				<div>Ранее</div>
 			</div>
 			<div className="inner">
-				<NavLink to="/fakebook/overlay__notifications/" className="notification">
+				<NavLink to={rmap.get("url_ov_notifications")} className="notification">
 					<div className="user">
-						<NavLink to="/fakebook/overlay__notifications/">
+						<NavLink to={rmap.get("url_ov_notifications")}>
 							<img className="user__icon " src={img1} alt="{img1}"/>
 						</NavLink>
 					</div>
 					<div className="info">
-						<div className="info__name"><NavLink to="/fakebook/overlay__notifications/"><b>Имя Фамилия</b></NavLink> liked your photo</div>
+						<div className="info__name"><NavLink to={rmap.get("url_ov_notifications")}><b>Имя
+							Фамилия</b></NavLink> liked your photo
+						</div>
 						<div className="info__date">18 июня, 17:37</div>
 					</div>
 					<div className="news__ref">
