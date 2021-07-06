@@ -1,6 +1,7 @@
 import React, {useRef, useState} from 'react';
-import {Form, Button, Card, Alert, Container} from 'react-bootstrap';
+import {Alert, Button, Card, Container, Form} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
+import {auth, db} from '../firebase'
 
 import {useAuth} from '../contexts/AuthContext';
 import {rmap} from '../router';
@@ -9,6 +10,7 @@ const Signup = () => {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
+	const userName = useRef();
 	const {signup} = useAuth();
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -25,12 +27,28 @@ const Signup = () => {
 			setError('');
 			setLoading(true);
 			await signup(emailRef.current.value, passwordRef.current.value);
+			await auth.currentUser.updateProfile({
+				displayName: userName.current.value
+			})
+			b();
 			history.push(rmap.get("url_home"));
 		} catch {
 			setError('Failed to create an account');
+		} finally {
+			setLoading(false);
 		}
+	}
 
-		setLoading(false);
+	function b(){
+		db.collection("users").doc(auth.currentUser.uid).set({
+			name: userName.current.value
+		})
+			.then(() => {
+				console.log("Document written");
+			})
+			.catch((error) => {
+				console.error("Error adding document: ", error);
+			});
 	}
 
 	return (
@@ -54,6 +72,10 @@ const Signup = () => {
 						<Form.Group id="password-confirm">
 							<Form.Label>Password Confirmation</Form.Label>
 							<Form.Control ref={passwordConfirmRef} required type="password"/>
+						</Form.Group>
+						<Form.Group id="name">
+							<Form.Label>Name</Form.Label>
+							<Form.Control ref={userName} required type="text"/>
 						</Form.Group>
 						<Button disabled={loading} className="w-100 mt-3" type="submit">
 							Sign Up

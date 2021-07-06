@@ -15,7 +15,7 @@ const Friends = () => (
 				<NavLink to={rmap.get("url_ov_friends")}>
 					<button type="button"><b>Друзья</b></button>
 				</NavLink>
-			</div>s
+			</div>
 			<div className="friends__req inner">
 				<h3>Запросы на добавление в друзья</h3>
 				<div className="no__req no__text">Нет запросов</div>

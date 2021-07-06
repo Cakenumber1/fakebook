@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {HashRouter as Router, Switch, Route} from 'react-router-dom';
 
 import {AuthProvider} from './contexts/AuthContext';
 
@@ -13,6 +13,7 @@ import Messages from './blocks/Messages/Messages';
 import Notifications from './blocks/Notifications/Notifications';
 import Search from './blocks/Search/Search';
 import Overlay from './blocks/Overlay/Overlay';
+import Chat from './blocks/Messages/Chat/Chat';
 import {rmap} from './router';
 
 
@@ -32,7 +33,8 @@ function App() {
 						<PrivateRoute path={rmap.get("url_search")} component={Search}/>
 						<PrivateRoute path={rmap.get("url_ov_friends")} component={Overlay}/>
 						<PrivateRoute path={rmap.get("url_ov_home")} component={Overlay}/>
-						<PrivateRoute path={rmap.get("url_ov_messages")} component={Overlay}/>
+						<PrivateRoute exact path={rmap.get("url_ov_messages")} component={Overlay}/>
+						<PrivateRoute path={rmap.get("url_chat")} component={Chat}/>
 						<PrivateRoute path={rmap.get("url_ov_notifications")} component={Overlay}/>
 					</Switch>
 				</AuthProvider>

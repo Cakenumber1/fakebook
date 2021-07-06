@@ -34,7 +34,7 @@ const Home = () => {
 			<Create/>
 			<News/>
 			<FindF/>
-			<div>{currentUser.email}</div>
+			<div>{currentUser.displayName}</div>
 			<Button variant="link" onClick={handleLogout}>
 				Log Out
 			</Button>

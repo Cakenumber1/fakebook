@@ -37,7 +37,7 @@ const Messages = () => (
 				<button type="button">✕</button>
 			</div>
 			<div className="chat__list">
-				<NavLink to={rmap.get("url_ov_messages")} className="chat">
+				<NavLink to={rmap.get("url_chat")} className="chat">
 					<div className="user">
 						<img className="user__icon " src={img1} alt="{img1}"/>
 					</div>

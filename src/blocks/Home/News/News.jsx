@@ -7,8 +7,11 @@ import npic from '../../../img/npic.jpg';
 import like from '../../../img/like.svg';
 
 import {rmap} from '../../../router';
+import {useAuth} from '../../../contexts/AuthContext';
 
 const News = () => {
+
+	const {currentUser} = useAuth();
 
 	function dropdown() {
 		const x = document.querySelector('.news__options__content');
@@ -26,7 +29,7 @@ const News = () => {
 					<img className="user__icon " src={img1} alt="{img1}"/>
 				</NavLink>
 				<div className="info">
-					<NavLink to={rmap.get("url_ov_home")} className="info__name"><b>Имя Фамилия</b></NavLink>
+					<NavLink to={rmap.get("url_ov_home")} className="info__name"><b>{currentUser.displayName}</b></NavLink>
 					<div className="info__date">
 						<div>
 							18 июня, 17:37
@@ -56,7 +59,7 @@ const News = () => {
 			</div>
 			<div className="news__text">Текст Новости</div>
 			<NavLink to={rmap.get("url_ov_home")} className="news__img">
-				<img src={npic} alt=""/>
+				<img src={npic} height="360" width="360" alt=""/>
 			</NavLink>
 			<div className="likesncomments">
 				<div className="likes__c"><img src={like} height="15" width="15" alt=""/> 0</div>
@@ -78,7 +81,7 @@ const News = () => {
 					</NavLink>
 				</div>
 				<div className="comment__inner">
-					<NavLink to={rmap.get("url_ov_home")} className="comment__name"><b>Имя Фамилия</b></NavLink>
+					<NavLink to={rmap.get("url_ov_home")} className="comment__name"><b>{currentUser.displayName}</b></NavLink>
 					<NavLink to={rmap.get("url_ov_home")}
 							 className="comment__text"> кстТекстксткстТексткстТекстксткстТексткстТекстксткстТекст</NavLink>
 				</div>

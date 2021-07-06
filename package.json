@@ -1,5 +1,5 @@
 {
-  "homepage": "https://Cakenumber1.github.io/fakebook",
+  "homepage": "https://Cakenumber1.github.io/fakebook/",
   "name": "fakebook",
   "version": "0.1.0",
   "private": true,
@@ -8,7 +8,9 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^5.0.2",
-    "firebase": "^8.6.8",
+    "bootstrap-react": "^0.5.0-alpha.14",
+    "firebase": "^8.7.0",
+    "firebase-app": "^0.0.1",
     "process": "^0.11.10",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
