@@ -1,11 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import Header from '../Header/Header';
-import img1 from '../../img/prof.jpg';
 import {rmap} from '../../router';
+import {db} from '../../firebase';
+import {useAuth} from '../../contexts/AuthContext';
+import ChatBlock from './ChatBlock';
 
-const Messages = () => (
+const Messages = () => {
+
+	const [chats, setChats] = useState([]);
+	const {currentUser} = useAuth();
+
+	useEffect(()=>{
+		db.collection("users/"+currentUser.uid+"/chats")
+			.onSnapshot(snapshot =>
+				setChats(snapshot.docs.map(doc =>({id: doc.id, data: doc.data()})))
+			);
+	}, []);
+
+	return(
 	<div>
 		<Header/>
 		<div className="mes">
@@ -37,16 +51,15 @@ const Messages = () => (
 				<button type="button">✕</button>
 			</div>
 			<div className="chat__list">
-				<NavLink to={rmap.get("url_chat")} className="chat">
-					<div className="user">
-						<img className="user__icon " src={img1} alt="{img1}"/>
-					</div>
-					<div className="info">
-						<div className="chat__name">Имя Фамилия</div>
-						<div className="chat__ls">Текст сообщения</div>
-					</div>
-					<div>[Date]</div>
-				</NavLink>
+				{chats.map(chat =>(
+						<ChatBlock
+							key={chat.id}
+							profilePic={chat.data.profilePic}
+							username={chat.data.username}
+							text="idk"
+							key2={chat.id}
+						/>
+					))}
 			</div>
 			<div className="mes__options">
 				<ul type="none">
@@ -59,6 +72,6 @@ const Messages = () => (
 			</div>
 		</div>
 	</div>
-);
+	)};
 
 export default Messages;

@@ -3,10 +3,8 @@ import {NavLink} from 'react-router-dom';
 
 import img1 from '../../../img/prof.jpg';
 import {rmap} from '../../../router';
-import {useAuth} from "../../../contexts/AuthContext";
 
 const Create = () => {
-	const {currentUser} = useAuth();
 	return(
 		<div className="create">
 			<div>
@@ -15,12 +13,12 @@ const Create = () => {
 				</NavLink>
 			</div>
 			<div className="create__mid">
-				<NavLink to={rmap.get("url_ov_home")}>
+				<NavLink to={rmap.get("url_create_post")}>
 					<button type="button" className="decor">Что у вас нового?</button>
 				</NavLink>
 			</div>
 			<div className="decor">
-				<NavLink to={rmap.get("url_ov_home")} className="photo">
+				<NavLink to={rmap.get("url_create_post")} className="photo">
 					<svg className="svg-icon" viewBox="0 0 32 32">
 						<g fill="#2a3345">
 							<path

@@ -1,27 +1,16 @@
 import React from "react";
 
-export default function Message({arr}){
-	if (arr[3]===undefined) {
-		return (
-			<div className="message-container" id={arr[0]}>
-				<div className="spacing">
-					<div className="pic">{arr[4]}</div>
-				</div>
-				<div className="message">{arr[3]}</div>
-				<div className="name">{arr[2]}</div>
+const Message = ({text, profilePicUrl, timestamp, UserId, username}) => {
+	console.log(1)
+	return (
+		<div>
+			<div>
+				<div>{profilePicUrl}</div>
 			</div>
-		);
-	} else {
-		return (
-			<div className="message-container" id={arr[0]}>
-				<div className="spacing">
-					<div className="pic">{arr[4]}</div>
-				</div>
-				<div className="message">
-					<img src={arr[5] + '&' + new Date().getTime()} alt=""/>
-				</div>
-				<div className="name">{arr[2]}</div>
-			</div>
-		);
-	}
+			<div>{text}</div>
+			<div>{username}</div>
+			<div>{new Date(timestamp?.toDate()).toUTCString()}</div>
+		</div>
+	);
 }
+export default Message

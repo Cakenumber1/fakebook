@@ -1,12 +1,14 @@
 {
-  "homepage": "https://Cakenumber1.github.io/fakebook/",
+  "homepage": "https://Cakenumber1.github.io/fakebook/#/home",
   "name": "fakebook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "bootstrap-react": "^0.5.0-alpha.14",
     "firebase": "^8.7.0",
@@ -41,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@material-ui/core": "^4.12.1",
     "gh-pages": "^3.2.3",
     "xo": "^0.40.2"
   }

@@ -1,5 +1,7 @@
 let routerMap = new Map([
+	["url_start", "/"],
 	["url_home", "/home/"],
+	["url_create_post", "/createpost/"],
 	["url_friends", "/friends/"],
 	["url_messages", "/messages/"],
 	["url_notifications", "/notifications/"],

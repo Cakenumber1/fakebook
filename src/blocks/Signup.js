@@ -28,9 +28,10 @@ const Signup = () => {
 			setLoading(true);
 			await signup(emailRef.current.value, passwordRef.current.value);
 			await auth.currentUser.updateProfile({
-				displayName: userName.current.value
+				displayName: userName.current.value,
+				photoURL: 'https://lh3.googleusercontent.com/a/AATXAJwaJPpAFh4sWy_OSDtSHthSsHWNcV2FbkGL-ALm=s96-c'
 			})
-			b();
+			addUser();
 			history.push(rmap.get("url_home"));
 		} catch {
 			setError('Failed to create an account');
@@ -39,9 +40,11 @@ const Signup = () => {
 		}
 	}
 
-	function b(){
+	function addUser(){
 		db.collection("users").doc(auth.currentUser.uid).set({
-			name: userName.current.value
+			name: userName.current.value,
+			photoUrl: 'https://lh3.googleusercontent.com/a/AATXAJwaJPpAFh4sWy_OSDtSHthSsHWNcV2FbkGL-ALm=s96-c'
+
 		})
 			.then(() => {
 				console.log("Document written");
@@ -54,8 +57,7 @@ const Signup = () => {
 	return (
 		<Container
 			className="d-flex align-items-center justify-content-center"
-			style={{minHeight: "100vh"}}
-		>
+			style={{minHeight: "100vh"}}>
 			<Card>
 				<Card.Body>
 					<h2 className="text-center mb-4">Sign Up</h2>
@@ -86,7 +88,6 @@ const Signup = () => {
 					</div>
 				</Card.Body>
 			</Card>
-
 		</Container>
 	);
 };

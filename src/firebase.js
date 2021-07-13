@@ -8,11 +8,14 @@ const firebaseConfig = {
 	storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
 	messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
 	appId: process.env.REACT_APP_FIREBASE_APP_ID,
+	locationID: process.env.REACT_APP_FIREBASE_LOC_ID
 };
 
 
 const myApp = firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
+export const str = firebase.storage();
+export const fieldValue = firebase.firestore.FieldValue;
 export const auth = myApp.auth();
 export const mess = firebase.messaging();
 export default myApp;

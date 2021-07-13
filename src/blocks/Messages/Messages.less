@@ -34,6 +34,7 @@
 }
 
 .mes__search {
+  width: 100%;
   padding: 10px 5px 10px 5px;
 
   input {
@@ -41,7 +42,7 @@
     border-radius: 5px;
     border: 0;
     box-shadow: inset 0px 1px 0px .5px rgba(34, 60, 80, 0.2);
-    width: 88%;
+    width: calc(100% - 26px);
     padding: 5px;
     font-size: 14px;
   }
@@ -88,5 +89,72 @@
   a {
     text-decoration: none;
     color: cornflowerblue;
+  }
+}
+
+
+.adressant {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 7px;
+  border-bottom: 1px solid #d4d7dc;
+
+  .adressant__left {
+    width: 40px;
+  }
+
+  .adressant__mid {
+    width: 100%;
+  }
+
+}
+
+.plus__icon {
+  width: 24px;
+  height: 24px;
+  border: 2px solid grey;
+  border-radius: 100%;
+  text-align: center;
+}
+
+#chat-create-input {
+  border: 0;
+  width: 100%;
+}
+
+.first__message__input {
+  width: 100%;
+  border: 0;
+  resize: none;
+  padding: 12px 10px;
+}
+
+.first__message__addons{
+  display: flex;
+  height: 60px;
+  background: white;
+  padding: 8px 8px 10px;
+
+  >div{
+    padding: 9px;
+  }
+}
+
+
+.create__message__top {
+  button {
+    background: 0;
+    border: 0;
+    color: white;
+  }
+
+  button[disabled] {
+    color: darkgrey;
+  }
+
+  a {
+    color: whitesmoke;
   }
 }
