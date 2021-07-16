@@ -13,10 +13,11 @@ const CreateChat = () => {
 	const send__button = useRef();
 	const {currentUser} = useAuth();
 
+	const users = [];
 	const [target, setTarget] = React.useState(users[0]);
 	const [loading, setLoading] = useState(false);
 
-	const users = [];
+
 
 	async function getData() {
 		await db.collection('users')
