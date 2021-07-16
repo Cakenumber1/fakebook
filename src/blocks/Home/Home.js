@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Suspense} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import {useAuth} from '../../contexts/AuthContext';
 
 import Create from './Create/Create';
-import Post from './News/Post';
+
+const Post = React.lazy(() => import('./News/Post'));
+
 import FindF from './FindF/FindF';
 import Header from '../Header/Header';
 import {Button} from 'react-bootstrap';
@@ -19,7 +21,7 @@ const Home = () => {
 	const history = useHistory();
 	const [posts, setPosts] = useState([]);
 
-	useEffect(() => {
+	useEffect(async () => {
 		db.collection("news")
 			.orderBy('timestamp', 'desc')
 			.onSnapshot(snapshot =>
@@ -42,20 +44,21 @@ const Home = () => {
 		<div className="full__home">
 			<Header/>
 			<Create/>
-			{posts.map(post => (
-				<Post
-					key={post.id}
-					profilePic={post.data.profilePic}
-					message={post.data.message}
-					timestamp={post.data.timestamp}
-					username={post.data.username}
-					userUid={post.data.userUid}
-					image={post.data.image}
-					likes={post.data.likes}
-					comments={post.data.comments}
-					key2={post.id}
-				/>
-			))}
+			<Suspense fallback={<div>Грузим</div>}>
+				{posts.map(post => (
+					<Post
+						key={post.id}
+						profilePic={post.data.profilePic}
+						message={post.data.message}
+						timestamp={post.data.timestamp}
+						username={post.data.username}
+						userUid={post.data.userUid}
+						image={post.data.image}
+						likes={post.data.likes}
+						key2={post.id}
+					/>
+				))}
+			</Suspense>
 			<FindF/>
 			<div>{currentUser.displayName}</div>
 			<Button variant="link" onClick={handleLogout}>

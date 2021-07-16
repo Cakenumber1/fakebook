@@ -16,7 +16,9 @@ import Overlay from './blocks/Overlay/Overlay';
 import Chat from './blocks/Messages/Chat/Chat';
 import CreateChat from './blocks/Messages/CreateChat/CreateChat';
 import CreatePost from './blocks/Home/Create/CreatePost';
+import PostInfo from './blocks/Home/News/PostInfo';
 import {rmap} from './router';
+
 
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
 						<PrivateRoute path={rmap.get("url_create_post")} component={CreatePost}/>
 						<PrivateRoute exact path={rmap.get("url_ov_messages")} component={CreateChat}/>
 						<PrivateRoute path={rmap.get("url_chat")} component={Chat}/>
+						<PrivateRoute path={rmap.get("url_post")} component={PostInfo}/>
 						<PrivateRoute path={rmap.get("url_ov_notifications")} component={Overlay}/>
 					</Switch>
 				</AuthProvider>

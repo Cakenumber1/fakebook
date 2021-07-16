@@ -9,6 +9,7 @@ let routerMap = new Map([
 	["url_options", "/options/"],
 	["url_ov_friends", "/overlay__friends/"],
 	["url_ov_home", "/overlay__home/"],
+	["url_post", "/post/"],
 	["url_ov_messages", "/overlay__messages/"],
 	["url_chat", "/chat/"],
 	["url_ov_notifications", "/overlay__notifications/"],

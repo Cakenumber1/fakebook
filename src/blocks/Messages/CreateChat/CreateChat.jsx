@@ -16,18 +16,20 @@ const CreateChat = () => {
 	const {currentUser} = useAuth();
 	const [loading, setLoading] = useState(false);
 
-	function getData() {
-		db.collection('users').get().then((qS) => {
+	async function getData() {
+		await db.collection('users').get().then((qS) => {
 			qS.forEach((data) => {
 				if (data.id !== currentUser.uid) {
 					let temp = {
-						name: "",
-						id: ""
-					}
-					temp.id = data.id
+						displayName: "",
+						uid: "",
+						photoURL: ""
+					};
+					temp.uid = data.id;
 					db.collection('users').doc(data.id).get().then((curUser) => {
-						temp.name = curUser.data().name
-						users.push(temp)
+						temp.displayName = curUser.data().name;
+						temp.photoURL = curUser.data().photoUrl;
+						users.push(temp);
 					})
 				}
 			})
@@ -39,7 +41,7 @@ const CreateChat = () => {
 			<Autocomplete
 				id="chat-create-input"
 				options={users}
-				getOptionLabel={(option) => option.name}
+				getOptionLabel={(option) => option.displayName}
 				clearOnEscape
 				value={target}
 				onChange={(event, newValue) => {
@@ -62,37 +64,50 @@ const CreateChat = () => {
 		}
 	}
 
-	function add(messageText, docRef, user_id) {
-		db.collection('users/' + user_id + '/chats').doc(docRef.id).collection('messages').add({
+	async function addMessage(messageText, user_id, docRef) {
+		await db.collection('users/' + user_id + '/chats').doc(docRef.id).collection('messages').add({
 			userId: currentUser.uid,
 			username: currentUser.displayName,
 			text: messageText,
-			profilePicUrl: currentUser.photoURL,
+			profilePic: currentUser.photoURL,
 			timestamp: fieldValue.serverTimestamp()
+		})
+		await db.collection('users/').doc(user_id + '/chats/'+docRef.id).update({
+			username: currentUser.displayName,
+			timestamp: fieldValue.serverTimestamp(),
+			lastMessage: messageText
 		})
 	}
 
-	function create(messageText, user_id, target_id) {
-		db.collection('users/' + user_id + '/chats').add({
-			with: target_id
+	async function create(messageText, user, target) {
+		const user_id = user.uid;
+		await  db.collection('users/' + user_id + '/chats').add({
+			with: target.uid,
+			withname: target.displayName,
+			username: currentUser.displayName,
+			profilePic: target.photoURL,
+			timestamp: fieldValue.serverTimestamp(),
+			lastMessage: messageText
 		}).then((docRef) => {
-			add(messageText, docRef, user_id)
+			addMessage(messageText, user_id, docRef)
 		}).catch((error) => {
 			console.error("Error adding document: ", error);
 		})
 	}
 
-	function check(messageText, user_id, target_id) {
+	async function check(messageText, user, target) {
+		let target_id = target.uid;
+		let user_id = user.uid;
 		let st = false;
-		db.collection('users/' + user_id + '/chats').get().then((i) => {
+		await db.collection('users/' + user_id + '/chats').get().then((i) => {
 			i.forEach((j) => {
 				if ((j.data().with === target_id)) {
 					st = true
-					add(messageText, j, user_id,);
+					addMessage(messageText, j, user_id);
 				}
 			})
 			if (st === false) {
-				create(messageText, user_id, target_id)
+				create(messageText, user, target)
 			}
 		})
 	}
@@ -101,8 +116,8 @@ const CreateChat = () => {
 		try {
 			setLoading(true);
 			let messageText = nesf2.current.value;
-			check(messageText, target.id, currentUser.uid)
-			check(messageText, currentUser.uid, target.id)
+			check(messageText, target, currentUser)
+			check(messageText, currentUser, target)
 		} catch {
 			console.log('smth went wrong')
 		}
@@ -139,3 +154,4 @@ const CreateChat = () => {
 }
 
 export default CreateChat;
+

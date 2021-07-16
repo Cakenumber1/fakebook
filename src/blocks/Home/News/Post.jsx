@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import like_img from '../../../img/like.svg';
@@ -9,10 +9,11 @@ import {useAuth} from '../../../contexts/AuthContext';
 import Comment from './Comment';
 import {db, fieldValue} from '../../../firebase';
 
-function Post({key2, profilePic, image, username, timestamp, message, likes, comments}) {
+function Post({key2, profilePic, image, username, timestamp, message, likes}) {
 
 	const {currentUser} = useAuth();
 	const n_o_c = useRef();
+	const [comments, setComments] = useState([]);
 
 	function dropdown() {
 		if (n_o_c.current.style.display === 'none') {
@@ -21,6 +22,14 @@ function Post({key2, profilePic, image, username, timestamp, message, likes, com
 			n_o_c.current.style.display = 'none';
 		}
 	}
+
+	useEffect(async () => {
+		db.collection("news/" + key2 + "/comments/")
+			.orderBy("likeCount", "desc")
+			.onSnapshot(snapshot =>
+				setComments(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()})))
+			);
+	}, []);
 
 	function like() {
 		let path = db.collection('news').doc(key2);
@@ -72,22 +81,24 @@ function Post({key2, profilePic, image, username, timestamp, message, likes, com
 					</div>
 				</div>
 			</div>
-			<div className="news__text">{message}</div>
+			<div className="news__text">
+				<NavLink to={rmap.get("url_post") + key2}>{message}</NavLink>
+			</div>
 			{
 				image &&
-				<NavLink to={rmap.get("url_ov_home")} className="news__img">
+				<NavLink to={rmap.get("url_post") + key2} className="news__img">
 					<img src={image} height="360" width="360" alt=""/>
 				</NavLink>
 			}
 			<div className="likesncomments">
 				<div className="likes__c" onClick={like}><img src={like_img} height="15" width="15"
-															  alt=""/>{likes.length}</div>
-				<div className="comments__c">Комментарии:{comments.length}</div>
+				/>{likes.length}</div>
+				<div className="comments__c">Комментарии:{}</div>
 			</div>
 			<div className="news__actions">
 				<div className="add__like" onClick={like}>Нравится</div>
 				<div className="add__comment">
-					<NavLink to={rmap.get("url_ov_home")}>
+					<NavLink to={rmap.get("url_post") + key2}>
 						Комментировать
 					</NavLink>
 				</div>
@@ -96,10 +107,9 @@ function Post({key2, profilePic, image, username, timestamp, message, likes, com
 			<div>
 				{comments.map(comment => (
 					<Comment
-						profilePic={comment.profilePic}
-						text={comment.text}
-						username={comment.username}
-						likes={comment.likes}
+						post={key2}
+						data={comment.data}
+						id={comment.id}
 					/>
 				))}
 			</div>

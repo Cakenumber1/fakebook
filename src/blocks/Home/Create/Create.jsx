@@ -3,13 +3,17 @@ import {NavLink} from 'react-router-dom';
 
 import img1 from '../../../img/prof.jpg';
 import {rmap} from '../../../router';
+import {useAuth} from '../../../contexts/AuthContext';
 
 const Create = () => {
+
+	const {currentUser} = useAuth();
+
 	return(
 		<div className="create">
 			<div>
 				<NavLink to={rmap.get("url_ov_home")} className="user">
-					<img className="user__icon " src={img1} alt={img1}/>
+					<img className="user__icon " src={currentUser.photoURL} alt={img1}/>
 				</NavLink>
 			</div>
 			<div className="create__mid">

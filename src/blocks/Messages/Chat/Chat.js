@@ -1,45 +1,95 @@
-/**
- * Copyright 2018 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 import {useAuth} from '../../../contexts/AuthContext';
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import Overlay from '../../Overlay/Overlay';
-import {db} from '../../../firebase'
+import {db, fieldValue} from '../../../firebase'
 import Message from './Message';
-
 
 const Chat = () => {
 
+	const message_inp = useRef();
+	const send__button = useRef();
 	const {currentUser} = useAuth();
 	const [mess, setMess] = useState([]);
-	const result = /[^/]*$/.exec(window.location.href)[0];
-	console.log(result)
+	const [loading, setLoading] = useState(false);
+	const messagesEnd = useRef();
 
-	useEffect(()=>{
-		db.collection("users/"+currentUser.uid+"/chats/"+result+"/messages")
-			.orderBy('timestamp', 'desc')
+	function split(url) {
+		const urlArr = url.split('/');
+		return urlArr[urlArr.length - 1];
+	}
+
+	const result = split(window.location.href)
+	//const result = /[^/]*$/.exec(window.location.href)[0];
+
+	useEffect(async () => {
+		db.collection("users/" + currentUser.uid + "/chats/" + result + "/messages")
+			.orderBy('timestamp', 'asc')
 			.onSnapshot(snapshot =>
-				setMess(snapshot.docs.map(doc =>({id: doc.id, data: doc.data()})))
+				setMess(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()})))
 			);
 	}, []);
+
+	async function addMessage(messageText, user_id, docRef) {
+		await db.collection('users/' + user_id + '/chats').doc(docRef).collection('messages').add({
+			userId: currentUser.uid,
+			username: currentUser.displayName,
+			text: messageText,
+			profilePic: currentUser.photoURL,
+			timestamp: fieldValue.serverTimestamp()
+		})
+		await db.collection('users/').doc(user_id + '/chats/' + docRef).update({
+			username: currentUser.displayName,
+			timestamp: fieldValue.serverTimestamp(),
+			lastMessage: messageText
+		})
+	}
+
+	async function getChat(user_id) {
+		let ans;
+		await db.collection('users/' + user_id + '/chats')
+			.where("with", "==", currentUser.uid).get()
+			.then((qs) => {
+				qs.forEach((doc) => {
+					ans = doc.id
+				})
+			})
+		return ans
+	}
+
+	async function sendMessage() {
+		setLoading(true);
+		try {
+			let messageText = message_inp.current.value;
+			let target = await db.collection('users/' + currentUser.uid + '/chats')
+				.doc(result)
+				.get()
+				.then((doc) => {
+						return (doc.data().with)
+					}
+				)
+			let path = await getChat(target);
+			addMessage(messageText, currentUser.uid, result);
+			addMessage(messageText, target, path);
+		} catch (e) {
+			console.log('smth went wrong' + e)
+		}
+		message_inp.current.value = '';
+		setLoading(false);
+	}
+
+	const scrollToBottom = () => {
+		messagesEnd.current?.scrollIntoView({ behavior: "smooth" })
+	}
+
+	useEffect(() => {
+		scrollToBottom()
+	}, [mess]);
 
 	return (
 		<div>
 			<Overlay/>
-			<div>
-				{mess.map(one =>(
+			<div className="mt-5 marg__bot">
+				{mess.map(one => (
 					<Message
 						key={one.id}
 						text={one.data.text}
@@ -49,6 +99,11 @@ const Chat = () => {
 						username={one.data.username}
 					/>
 				))}
+			</div>
+			<div  ref={messagesEnd} />
+			<div className="position-fixed bottom-0 w-100 d-flex">
+				<textarea className="w-75" ref={message_inp} rows="5"/>
+				<button className="w-25" ref={send__button} type="button" onClick={sendMessage}>Отправить</button>
 			</div>
 		</div>
 	);

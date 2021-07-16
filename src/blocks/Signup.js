@@ -7,6 +7,7 @@ import {useAuth} from '../contexts/AuthContext';
 import {rmap} from '../router';
 
 const Signup = () => {
+
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();

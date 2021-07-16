@@ -12,7 +12,7 @@ const Messages = () => {
 	const [chats, setChats] = useState([]);
 	const {currentUser} = useAuth();
 
-	useEffect(()=>{
+	useEffect(async ()=>{
 		db.collection("users/"+currentUser.uid+"/chats")
 			.onSnapshot(snapshot =>
 				setChats(snapshot.docs.map(doc =>({id: doc.id, data: doc.data()})))
@@ -52,13 +52,15 @@ const Messages = () => {
 			</div>
 			<div className="chat__list">
 				{chats.map(chat =>(
-						<ChatBlock
-							key={chat.id}
-							profilePic={chat.data.profilePic}
-							username={chat.data.username}
-							text="idk"
-							key2={chat.id}
-						/>
+					<ChatBlock
+					key={chat.id}
+					withname={chat.data.withname}
+					chatPic={chat.data.profilePic}
+					username={chat.data.username}
+					text={chat.data.lastMessage}
+					timestamp={chat.data.timestamp}
+					key2={chat.id}
+					/>
 					))}
 			</div>
 			<div className="mes__options">
