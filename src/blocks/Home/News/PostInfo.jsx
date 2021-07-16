@@ -1,13 +1,15 @@
-import {useAuth} from '../../../contexts/AuthContext';
 import React, {useEffect, useRef, useState} from 'react';
+
+import {useAuth} from '../../../contexts/AuthContext';
 import Overlay from '../../Overlay/Overlay';
-import {db, fieldValue} from '../../../firebase'
+import {db} from '../../../firebase'
 import Post from './Post';
 
 const PostInfo = () => {
 	const {currentUser} = useAuth();
 	const message_inp = useRef();
 	const send__button = useRef();
+
 	const [loading, setLoading] = useState(true);
 	const [data, setData] = useState([]);
 
@@ -21,8 +23,9 @@ const PostInfo = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await db.collection("news")
-					.doc(result).get();
+				const response = await db.collection('news')
+					.doc(result)
+					.get();
 				let data = {title: 'not found'};
 				if (response.exists) {
 					data = response.data();
@@ -37,17 +40,6 @@ const PostInfo = () => {
 
 	}, []);
 
-
-	function getData() {
-		db.collection("news/").doc(result).get()
-			.then((doc) => {
-					if (doc.exists)
-						console.log(doc.data());
-					return doc.data();
-				}
-			)
-	}
-
 	function createComment() {
 		return {
 			likes: [],
@@ -59,10 +51,10 @@ const PostInfo = () => {
 		}
 	}
 
-	function addComment() {
+	async function addComment() {
 		setLoading(true);
 		try {
-			db.collection('news/'+ result+'/comments')
+			await db.collection('news/'+ result+'/comments')
 				.add(createComment());
 		} catch (e) {
 			console.log('smth went wrong' + e);

@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react';
-import {rmap} from '../../../router';
-import {db, fieldValue, str} from '../../../firebase';
 import {NavLink, useHistory} from 'react-router-dom';
+
+import {db, fieldValue, str} from '../../../firebase';
 import {useAuth} from '../../../contexts/AuthContext';
+import {rmap} from '../../../router';
 
 
 const CreatePost = () => {
@@ -19,12 +20,11 @@ const CreatePost = () => {
 	let selectedFile = null;
 
 	function onMediaFileSelected(event) {
+
 		event.preventDefault();
 		var file = event.target.files[0];
-
 		// Clear the selection in the file picker input.
 		imageFormElement.reset();
-
 		// Check if the file is an image.
 		if (!file.type.match('image.*')) {
 			var data = {
@@ -38,10 +38,11 @@ const CreatePost = () => {
 	}
 
 	// This first saves the image in Firebase storage.
-	function saveImageMessage(file) {
+	async function saveImageMessage(file) {
+
 		setLoading(true)
 		// 1 - We add a message with a loading icon that will get updated with the shared image.
-		db.collection('news/').add({
+		await db.collection('news/').add({
 			comments: [],
 			image: LOADING_IMAGE_URL,
 			likes: [],
@@ -70,10 +71,10 @@ const CreatePost = () => {
 		setLoading(false);
 	}
 	// This first saves the image in Firebase storage.
-	function saveMessage() {
+	async function saveMessage() {
 		setLoading(true)
 		// 1 - We add a message with a loading icon that will get updated with the shared image.
-		db.collection('news/').add({
+		await db.collection('news/').add({
 			comments: [],
 			likes: [],
 			message: post__text.current.value,

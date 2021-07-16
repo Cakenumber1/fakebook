@@ -1,5 +1,6 @@
-import {useAuth} from '../../../contexts/AuthContext';
 import React, {useEffect, useRef, useState} from 'react';
+
+import {useAuth} from '../../../contexts/AuthContext';
 import Overlay from '../../Overlay/Overlay';
 import {db, fieldValue} from '../../../firebase'
 import Message from './Message';
@@ -22,7 +23,7 @@ const Chat = () => {
 	//const result = /[^/]*$/.exec(window.location.href)[0];
 
 	useEffect(async () => {
-		db.collection("users/" + currentUser.uid + "/chats/" + result + "/messages")
+		db.collection('users/' + currentUser.uid + '/chats/' + result + '/messages')
 			.orderBy('timestamp', 'asc')
 			.onSnapshot(snapshot =>
 				setMess(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()})))
@@ -30,14 +31,18 @@ const Chat = () => {
 	}, []);
 
 	async function addMessage(messageText, user_id, docRef) {
-		await db.collection('users/' + user_id + '/chats').doc(docRef).collection('messages').add({
+		await db.collection('users/' + user_id + '/chats')
+			.doc(docRef).collection('messages')
+			.add({
 			userId: currentUser.uid,
 			username: currentUser.displayName,
 			text: messageText,
 			profilePic: currentUser.photoURL,
 			timestamp: fieldValue.serverTimestamp()
 		})
-		await db.collection('users/').doc(user_id + '/chats/' + docRef).update({
+		await db.collection('users/')
+			.doc(user_id + '/chats/' + docRef)
+			.update({
 			username: currentUser.displayName,
 			timestamp: fieldValue.serverTimestamp(),
 			lastMessage: messageText
@@ -47,7 +52,7 @@ const Chat = () => {
 	async function getChat(user_id) {
 		let ans;
 		await db.collection('users/' + user_id + '/chats')
-			.where("with", "==", currentUser.uid).get()
+			.where('with', '==', currentUser.uid).get()
 			.then((qs) => {
 				qs.forEach((doc) => {
 					ans = doc.id
@@ -78,7 +83,7 @@ const Chat = () => {
 	}
 
 	const scrollToBottom = () => {
-		messagesEnd.current?.scrollIntoView({ behavior: "smooth" })
+		messagesEnd.current?.scrollIntoView({ behavior: 'smooth' })
 	}
 
 	useEffect(() => {

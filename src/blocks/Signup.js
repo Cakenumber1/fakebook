@@ -1,8 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {Alert, Button, Card, Container, Form} from 'react-bootstrap';
 import {Link, useHistory} from 'react-router-dom';
-import {auth, db} from '../firebase'
 
+import {auth, db} from '../firebase'
 import {useAuth} from '../contexts/AuthContext';
 import {rmap} from '../router';
 

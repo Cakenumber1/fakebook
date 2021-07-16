@@ -1,18 +1,19 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {NavLink} from 'react-router-dom';
-
-import like_img from '../../../img/like.svg';
-import err from '../../../img/error.png';
-
 import {rmap} from '../../../router';
+
 import {useAuth} from '../../../contexts/AuthContext';
 import Comment from './Comment';
 import {db, fieldValue} from '../../../firebase';
+
+import like_img from '../../../img/like.svg';
+import err from '../../../img/error.png';
 
 function Post({key2, profilePic, image, username, timestamp, message, likes}) {
 
 	const {currentUser} = useAuth();
 	const n_o_c = useRef();
+
 	const [comments, setComments] = useState([]);
 
 	function dropdown() {
@@ -24,8 +25,8 @@ function Post({key2, profilePic, image, username, timestamp, message, likes}) {
 	}
 
 	useEffect(async () => {
-		db.collection("news/" + key2 + "/comments/")
-			.orderBy("likeCount", "desc")
+		db.collection('news/' + key2 + '/comments/')
+			.orderBy('likeCount', 'desc')
 			.onSnapshot(snapshot =>
 				setComments(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()})))
 			);
@@ -45,7 +46,6 @@ function Post({key2, profilePic, image, username, timestamp, message, likes}) {
 			});
 		}
 	}
-
 	return (
 		<div className="news__container">
 			<div className="news__top">
@@ -115,6 +115,7 @@ function Post({key2, profilePic, image, username, timestamp, message, likes}) {
 			</div>
 		</div>
 	);
+
 };
 
 export default Post;

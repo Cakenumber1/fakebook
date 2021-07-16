@@ -1,16 +1,18 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import {rmap} from '../../../router';
-import like_img from '../../../img/like.svg';
+
 import {db, fieldValue} from '../../../firebase';
 import {useAuth} from '../../../contexts/AuthContext';
+import {rmap} from '../../../router';
+
+import like_img from '../../../img/like.svg';
 
 function Comment({post, data, id}) {
 
 	const {currentUser} = useAuth();
 
 	function like() {
-		let path = db.collection("news/" +post+"/comments/").doc(id);
+		let path = db.collection('news/' +post+'/comments/').doc(id);
 		let c = data.likeCount
 
 		if (data.likes.indexOf(currentUser.uid) === -1) {

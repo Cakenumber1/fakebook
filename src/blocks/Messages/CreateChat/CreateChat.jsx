@@ -9,15 +9,19 @@ import {useAuth} from '../../../contexts/AuthContext';
 
 const CreateChat = () => {
 
-	const users = [];
-	const [target, setTarget] = React.useState(users[0]);
 	const nesf2 = useRef();
 	const send__button = useRef();
 	const {currentUser} = useAuth();
+
+	const [target, setTarget] = React.useState(users[0]);
 	const [loading, setLoading] = useState(false);
 
+	const users = [];
+
 	async function getData() {
-		await db.collection('users').get().then((qS) => {
+		await db.collection('users')
+			.get()
+			.then((qS) => {
 			qS.forEach((data) => {
 				if (data.id !== currentUser.uid) {
 					let temp = {
@@ -26,7 +30,10 @@ const CreateChat = () => {
 						photoURL: ""
 					};
 					temp.uid = data.id;
-					db.collection('users').doc(data.id).get().then((curUser) => {
+					db.collection('users')
+						.doc(data.id)
+						.get()
+						.then((curUser) => {
 						temp.displayName = curUser.data().name;
 						temp.photoURL = curUser.data().photoUrl;
 						users.push(temp);
@@ -65,14 +72,19 @@ const CreateChat = () => {
 	}
 
 	async function addMessage(messageText, user_id, docRef) {
-		await db.collection('users/' + user_id + '/chats').doc(docRef.id).collection('messages').add({
+		await db.collection('users/' + user_id + '/chats')
+			.doc(docRef.id)
+			.collection('messages')
+			.add({
 			userId: currentUser.uid,
 			username: currentUser.displayName,
 			text: messageText,
 			profilePic: currentUser.photoURL,
 			timestamp: fieldValue.serverTimestamp()
 		})
-		await db.collection('users/').doc(user_id + '/chats/'+docRef.id).update({
+		await db.collection('users/')
+			.doc(user_id + '/chats/'+docRef.id)
+			.update({
 			username: currentUser.displayName,
 			timestamp: fieldValue.serverTimestamp(),
 			lastMessage: messageText
@@ -81,7 +93,8 @@ const CreateChat = () => {
 
 	async function create(messageText, user, target) {
 		const user_id = user.uid;
-		await  db.collection('users/' + user_id + '/chats').add({
+		await  db.collection('users/' + user_id + '/chats')
+			.add({
 			with: target.uid,
 			withname: target.displayName,
 			username: currentUser.displayName,
@@ -99,7 +112,9 @@ const CreateChat = () => {
 		let target_id = target.uid;
 		let user_id = user.uid;
 		let st = false;
-		await db.collection('users/' + user_id + '/chats').get().then((i) => {
+		await db.collection('users/' + user_id + '/chats')
+			.get()
+			.then((i) => {
 			i.forEach((j) => {
 				if ((j.data().with === target_id)) {
 					st = true

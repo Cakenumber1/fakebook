@@ -1,28 +1,26 @@
 import React, {useEffect, useState, Suspense} from 'react';
+import {Button} from 'react-bootstrap';
 import {useHistory} from 'react-router-dom';
 
 import {useAuth} from '../../contexts/AuthContext';
-
 import Create from './Create/Create';
-
-const Post = React.lazy(() => import('./News/Post'));
-
-import FindF from './FindF/FindF';
 import Header from '../Header/Header';
-import {Button} from 'react-bootstrap';
-
 import {rmap} from '../../router';
 import {db} from '../../firebase';
 
+const Post = React.lazy(() => import('./News/Post'));
+const FindF = React.lazy(() => import('./FindF/FindF'));
+
 const Home = () => {
 
-	const [error, setError] = useState('');
 	const {currentUser, logout} = useAuth();
 	const history = useHistory();
+
+	const [error, setError] = useState('');
 	const [posts, setPosts] = useState([]);
 
 	useEffect(async () => {
-		db.collection("news")
+		db.collection('news')
 			.orderBy('timestamp', 'desc')
 			.onSnapshot(snapshot =>
 				setPosts(snapshot.docs.map(doc => ({id: doc.id, data: doc.data()})))
@@ -34,9 +32,9 @@ const Home = () => {
 
 		try {
 			await logout();
-			history.push(rmap.get("url_login"));
+			history.push(rmap.get('url_login'));
 		} catch {
-			setError("Failed to log out");
+			setError('Failed to log out');
 		}
 	}
 
@@ -44,7 +42,7 @@ const Home = () => {
 		<div className="full__home">
 			<Header/>
 			<Create/>
-			<Suspense fallback={<div>Грузим</div>}>
+			<Suspense fallback={<div className="h-100">Грузим</div>}>
 				{posts.map(post => (
 					<Post
 						key={post.id}
@@ -58,12 +56,12 @@ const Home = () => {
 						key2={post.id}
 					/>
 				))}
-			</Suspense>
 			<FindF/>
 			<div>{currentUser.displayName}</div>
 			<Button variant="link" onClick={handleLogout}>
 				Log Out
 			</Button>
+			</Suspense>
 		</div>
 	);
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
+
 import {rmap} from '../../router';
 
 const ChatBlock = ({key2, username, text, timestamp, chatPic, withname}) => {
