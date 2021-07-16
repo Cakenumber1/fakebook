@@ -6,12 +6,12 @@ const Message = ({text, profilePicUrl, timestamp, userId, username}) => {
 
 	const {currentUser} = useAuth();
 
-	let mcl = "d-flex justify-content-between bg-secondary text-white m-1"
-	let inner_mcl = "d-flex"
+	let mcl = "d-flex justify-content-between bg-secondary text-white m-1";
+	let inner_mcl = "d-flex";
 
 	if (userId === currentUser.uid){
-		mcl = "d-flex flex-row-reverse justify-content-between bg-info text-white m-1"
-		inner_mcl = "d-flex flex-row-reverse"
+		mcl = "d-flex flex-row-reverse justify-content-between bg-info text-white m-1";
+		inner_mcl = "d-flex flex-row-reverse";
 
 	}
 	return (

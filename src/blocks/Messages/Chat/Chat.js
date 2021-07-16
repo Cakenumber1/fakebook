@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 
 import {useAuth} from '../../../contexts/AuthContext';
 import Overlay from '../../Overlay/Overlay';
-import {db, fieldValue} from '../../../firebase'
+import {db, fieldValue} from '../../../firebase';
 import Message from './Message';
 
 const Chat = () => {
@@ -19,7 +19,7 @@ const Chat = () => {
 		return urlArr[urlArr.length - 1];
 	}
 
-	const result = split(window.location.href)
+	const result = split(window.location.href);
 	//const result = /[^/]*$/.exec(window.location.href)[0];
 
 	useEffect(async () => {
@@ -69,25 +69,25 @@ const Chat = () => {
 				.doc(result)
 				.get()
 				.then((doc) => {
-						return (doc.data().with)
+						return (doc.data().with);
 					}
 				)
 			let path = await getChat(target);
-			addMessage(messageText, currentUser.uid, result);
-			addMessage(messageText, target, path);
+			await addMessage(messageText, currentUser.uid, result);
+			await addMessage(messageText, target, path);
 		} catch (e) {
-			console.log('smth went wrong' + e)
+			console.log('smth went wrong' + e);
 		}
 		message_inp.current.value = '';
 		setLoading(false);
 	}
 
 	const scrollToBottom = () => {
-		messagesEnd.current?.scrollIntoView({ behavior: 'smooth' })
+		messagesEnd.current?.scrollIntoView({ behavior: 'smooth' });
 	}
 
 	useEffect(() => {
-		scrollToBottom()
+		scrollToBottom();
 	}, [mess]);
 
 	return (

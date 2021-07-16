@@ -102,7 +102,7 @@ const CreateChat = () => {
 			timestamp: fieldValue.serverTimestamp(),
 			lastMessage: messageText
 		}).then((docRef) => {
-			addMessage(messageText, user_id, docRef)
+			addMessage(messageText, user_id, docRef);
 		}).catch((error) => {
 			console.error("Error adding document: ", error);
 		})
@@ -122,7 +122,7 @@ const CreateChat = () => {
 				}
 			})
 			if (st === false) {
-				create(messageText, user, target)
+				create(messageText, user, target);
 			}
 		})
 	}
@@ -131,8 +131,8 @@ const CreateChat = () => {
 		try {
 			setLoading(true);
 			let messageText = nesf2.current.value;
-			check(messageText, target, currentUser)
-			check(messageText, currentUser, target)
+			check(messageText, target, currentUser);
+			check(messageText, currentUser, target);
 		} catch {
 			console.log('smth went wrong')
 		}
