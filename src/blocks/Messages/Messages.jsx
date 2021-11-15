@@ -23,6 +23,11 @@ const Messages = () => {
 			);
 	}, []);
 
+	function test(){
+		console.log(123);
+	}
+	export {test};
+
 	return (
 		<div>
 			<Header/>
@@ -81,4 +86,5 @@ const Messages = () => {
 	)
 };
 
+export {test};
 export default Messages;
